@@ -11,3 +11,18 @@ while(index < inputData.length) {
     }
     index = index + 1;
 }
+
+index = 0;
+
+while(index < inputData.length) {
+    indexTwo = index;
+    while(indexTwo < inputData.length) {
+        for(let indexThree = indexTwo + 1; indexThree < inputData.length; indexThree++) {
+            if(inputData[index] + inputData[indexTwo] + inputData[indexThree] === 2020) {
+                console.log(inputData[index] * inputData[indexThree] * inputData[indexTwo])
+            }
+        }
+        indexTwo = indexTwo + 1;
+    }
+    index = index + 1;
+}
