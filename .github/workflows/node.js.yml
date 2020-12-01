@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: do exercises
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci
+      name: install deps
+    - run: npm start
+      name: run exercises
