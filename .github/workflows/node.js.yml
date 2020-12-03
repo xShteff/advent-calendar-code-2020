@@ -17,5 +17,5 @@ jobs:
       name: install deps
     - run: npm run tsc
       name: compile
-    - run: node lib day${{ matrix.days }}/index.js
+    - run: npm run start:day${{ matrix.days }}
       name: run exercise
