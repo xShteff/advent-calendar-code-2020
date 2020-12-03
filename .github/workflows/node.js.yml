@@ -8,9 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: do exercises
+    strategy:
+      matrix:
+        days: [1, 2]
     steps:
     - uses: actions/checkout@v2
     - run: npm ci
       name: install deps
-    - run: npm start
-      name: run exercises
+    - run: npm run tsc
+      name: compile
+    - run: node lib day${{ matrix.days }}/index.js
+      name: run exercise
