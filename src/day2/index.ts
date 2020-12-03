@@ -7,7 +7,7 @@ interface PasswordEntry {
   passwordString: string;
 }
 
-class Task {
+class DayTwoTask {
   public data: PasswordEntry[];
 
   public constructor() {
@@ -36,7 +36,7 @@ class Task {
   };
 }
 
-class TaskOne extends Task {
+class DayTwoTaskOne extends DayTwoTask {
   public constructor() {
     super();
   }
@@ -68,7 +68,7 @@ class TaskOne extends Task {
   };
 }
 
-class TaskTwo extends Task {
+class DayTwoTaskTwo extends DayTwoTask {
   public constructor() {
     super();
   }
@@ -106,8 +106,8 @@ class TaskTwo extends Task {
 }
 
 // Task 1
-const taskOne = new TaskOne();
+const taskOne = new DayTwoTaskOne();
 taskOne.solveTask();
 // Task 2
-const taskTwo = new TaskTwo();
+const taskTwo = new DayTwoTaskTwo();
 taskTwo.solveTask();
