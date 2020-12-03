@@ -19,3 +19,4 @@ jobs:
       name: compile
     - run: npm run start:day${{ matrix.days }}
       name: run exercise
+    - run: node lib/day${{ matrix.days }}/index.js
