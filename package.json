@@ -4,7 +4,9 @@
   "description": "Exercises for 2020's Advent Calendar of Code",
   "scripts": {
     "start": "tsc && node lib/index.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start:day1": "tsc && node lib/day1/index.js",
+    "start:day2": "tsc && node lib/day2/index.js"
   },
   "repository": {
     "type": "git",
