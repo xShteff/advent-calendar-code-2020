@@ -1,4 +1,4 @@
-name: CI
+name: Execute Exercises
 
 on:
   push:
@@ -7,16 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: do exercises
+    name: Day
     strategy:
       matrix:
         days: [1, 2]
     steps:
     - uses: actions/checkout@v2
     - run: npm ci
-      name: install deps
+      name: Install Dependencies
     - run: npm run tsc
-      name: compile
-    - run: npm run start:day${{ matrix.days }}
-      name: run exercise
+      name: Compile TypeScript
     - run: node lib/day${{ matrix.days }}/index.js
+      name: Execute Exercise
