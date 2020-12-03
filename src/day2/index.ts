@@ -7,14 +7,6 @@ interface PasswordEntry {
   passwordString: string;
 }
 
-const characterCountInString = function(
-  character: string,
-  input: string
-): number {
-  const regex = new RegExp(character, "g");
-  return input.match(regex)?.length || 0;
-};
-
 class Task {
   public data: PasswordEntry[];
 
@@ -22,7 +14,11 @@ class Task {
     this.data = this.initData();
   }
 
-  public initData() {
+  public solveTask() {
+    throw Error("Method not implemented");
+  }
+
+  private initData = () => {
     let fileData: string[] = exportFileToLineArray("./inputs/day2.txt");
     let returnData: PasswordEntry[] = [];
     for (let i = 0; i < fileData.length; i++) {
@@ -37,9 +33,7 @@ class Task {
       }
     }
     return returnData;
-  }
-
-  public solveTask() {}
+  };
 }
 
 class TaskOne extends Task {
@@ -51,7 +45,7 @@ class TaskOne extends Task {
     let incorrectPasswordCount = 0;
 
     this.data.map((password) => {
-      const charCount = characterCountInString(
+      const charCount = this.characterCountInString(
         password.character,
         password.passwordString
       );
@@ -64,6 +58,14 @@ class TaskOne extends Task {
     });
     console.log(incorrectPasswordCount);
   }
+
+  private characterCountInString = (
+    character: string,
+    input: string
+  ): number => {
+    const regex = new RegExp(character, "g");
+    return input.match(regex)?.length || 0;
+  };
 }
 
 class TaskTwo extends Task {
@@ -72,7 +74,34 @@ class TaskTwo extends Task {
   }
 
   public solveTask() {
-    //TODO
+    let count = 0;
+    this.data.forEach((element) => {
+      if (
+        this.checkForOneMatch(
+          element.passwordString,
+          element.characterMin,
+          element.characterMax,
+          element.character
+        )
+      ) {
+        count += 1;
+      }
+    });
+    console.log(count);
+  }
+
+  private checkForOneMatch(
+    input: string,
+    pos1: number,
+    pos2: number,
+    lookupChar: string // Realised I could've just passed the entire object but I'm too committed to this
+  ) {
+    return (
+      (input.charAt(pos1 - 1) === lookupChar &&
+        input.charAt(pos2 - 1) !== lookupChar) ||
+      (input.charAt(pos1 - 1) !== lookupChar &&
+        input.charAt(pos2 - 1) === lookupChar)
+    );
   }
 }
 
@@ -80,3 +109,5 @@ class TaskTwo extends Task {
 const taskOne = new TaskOne();
 taskOne.solveTask();
 // Task 2
+const taskTwo = new TaskTwo();
+taskTwo.solveTask();
