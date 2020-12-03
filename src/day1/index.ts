@@ -2,6 +2,13 @@ import { data } from './input';
 
 // 'eh, one day I'll find a smarter way to do it.
 
+// Future Alin here. I did find a smarter way to do it, but I cba to re-write it.
+// Basically I could've mapped the data to a dictionary
+// then instead of looking through it twice, I could've done it once.
+// and basically instead of looping through it again, I could just use the dictionary to see 
+// if the value I need is existent or not, then move on.
+
+// "This will go into technical debt." - and never touched again.
 let index = 0;
 
 while(index < data.length) {
