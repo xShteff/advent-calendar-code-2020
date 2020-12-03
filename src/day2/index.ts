@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { exportFileToLineArray } from "../shared";
 
 interface PasswordEntry {
   characterMin: number;
@@ -15,40 +15,68 @@ const characterCountInString = function(
   return input.match(regex)?.length || 0;
 };
 
-let data: PasswordEntry[] = [];
+class Task {
+  public data: PasswordEntry[];
 
-try {
-  let fileData: string[] = readFileSync("./inputs/day2.txt", "utf8").split(
-    "\n"
-  );
-  for (let i = 0; i < fileData.length; i++) {
-    let iArray = /(\d\d|\d)-(\d\d|\d) (\w): (\w*)/g.exec(fileData[i]);
-    if (iArray) {
-      data.push({
-        character: iArray[3],
-        characterMin: Number(iArray[1]),
-        characterMax: Number(iArray[2]),
-        passwordString: iArray[4],
-      });
-    }
+  public constructor() {
+    this.data = this.initData();
   }
-} catch (e) {
-  console.log("Error:", e.stack);
+
+  public initData() {
+    let fileData: string[] = exportFileToLineArray("./inputs/day2.txt");
+    let returnData: PasswordEntry[] = [];
+    for (let i = 0; i < fileData.length; i++) {
+      let iArray = /(\d\d|\d)-(\d\d|\d) (\w): (\w*)/g.exec(fileData[i]);
+      if (iArray) {
+        returnData.push({
+          character: iArray[3],
+          characterMin: Number(iArray[1]),
+          characterMax: Number(iArray[2]),
+          passwordString: iArray[4],
+        });
+      }
+    }
+    return returnData;
+  }
+
+  public solveTask() {}
 }
 
-let incorrectPasswordCount = 0;
-
-data.map((password) => {
-  const charCount = characterCountInString(
-    password.character,
-    password.passwordString
-  );
-  if (
-    charCount >= password.characterMin &&
-    charCount <= password.characterMax
-  ) {
-    incorrectPasswordCount++;
+class TaskOne extends Task {
+  public constructor() {
+    super();
   }
-});
 
-console.log(incorrectPasswordCount);
+  public solveTask() {
+    let incorrectPasswordCount = 0;
+
+    this.data.map((password) => {
+      const charCount = characterCountInString(
+        password.character,
+        password.passwordString
+      );
+      if (
+        charCount >= password.characterMin &&
+        charCount <= password.characterMax
+      ) {
+        incorrectPasswordCount++;
+      }
+    });
+    console.log(incorrectPasswordCount);
+  }
+}
+
+class TaskTwo extends Task {
+  public constructor() {
+    super();
+  }
+
+  public solveTask() {
+    //TODO
+  }
+}
+
+// Task 1
+const taskOne = new TaskOne();
+taskOne.solveTask();
+// Task 2
